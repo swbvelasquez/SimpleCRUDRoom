@@ -1,4 +1,4 @@
-package com.tutoriales.simplecrudroom.views;
+package com.tutoriales.simplecrudroom.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import com.tutoriales.simplecrudroom.R;
 import com.tutoriales.simplecrudroom.database.AppDataBase;
 import com.tutoriales.simplecrudroom.entities.Person;
 import com.tutoriales.simplecrudroom.interfaces.daos.PersonDAO;
+import com.tutoriales.simplecrudroom.interfaces.services.IPersonService;
+import com.tutoriales.simplecrudroom.services.PersonService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,37 +18,37 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvResult;
+    private IPersonService personService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try{
             tvResult = findViewById(R.id.tvResult);
-            AppDataBase appDataBase = AppDataBase.getInstance(getApplicationContext());
-            PersonDAO personDAO = appDataBase.personDAO();
 
-            //getAll(personDAO);
-            //getById(2,personDAO);
-            //insert(personDAO);
-            insertAll(personDAO);
-            //update(1,personDAO);
-            //delete(3,personDAO);
+            personService = PersonService.getInstance(getApplicationContext());
+            //getAll();
+            //getById(2);
+            //insert();
+            insertAll();
+            //update(1);
+            //delete(3);
         }catch (Exception ex){
             tvResult.setText(ex.getMessage());
         }
     }
 
-    private void getAll(PersonDAO personDAO){
-        List<Person> list = personDAO.getAll();
+    private void getAll(){
+        List<Person> list = personService.getAll();
         tvResult.setText(list.toString());
     }
 
-    private void getById(int id,PersonDAO personDAO){
-        Person person = personDAO.getById(id);
+    private void getById(int id){
+        Person person = personService.getById(id);
         tvResult.setText(person.toString());
     }
 
-    private void insertAll(PersonDAO personDAO) {
+    private void insertAll() {
         List<Person> list = new ArrayList<>();
         Person person = null;
 
@@ -62,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         person.setActive(true);
         list.add(person);
 
-        personDAO.insertAll(list);
+        personService.insertAll(list);
 
-        list = personDAO.getAll();
+        list = personService.getAll();
         tvResult.setText(list.toString());
     }
 
-    private void insert(PersonDAO personDAO){
+    private void insert(){
         List<Person> list = new ArrayList<>();
         Person person = null;
 
@@ -77,33 +79,33 @@ public class MainActivity extends AppCompatActivity {
         person.setAge((int) (Math.random() * 50));
         person.setActive(true);
 
-        personDAO.insert(person);
+        personService.insert(person);
 
-        list = personDAO.getAll();
+        list = personService.getAll();
         tvResult.setText(list.toString());
     }
 
-    private void update(int id,PersonDAO personDAO){
+    private void update(int id){
         List<Person> list = new ArrayList<>();
         Person person = null;
 
-        person = personDAO.getById(id);
+        person = personService.getById(id);
         person.setName("User " + (int) (Math.random() * 50));
         person.setAge((int) (Math.random() * 50));
         person.setActive(false);
 
-        personDAO.update(person);
+        personService.update(person);
 
-        list = personDAO.getAll();
+        list = personService.getAll();
         tvResult.setText(list.toString());
     }
 
-    private void delete(int id,PersonDAO personDAO){
+    private void delete(int id){
         List<Person> list = new ArrayList<>();
-        Person person = personDAO.getById(id);
-        personDAO.delete(person);
+        Person person = personService.getById(id);
+        personService.delete(person);
 
-        list = personDAO.getAll();
+        list = personService.getAll();
         tvResult.setText(list.toString());
     }
 }

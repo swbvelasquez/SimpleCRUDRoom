@@ -1,17 +1,11 @@
-package com.tutoriales.simplecrudroom.interfaces.repositories;
-
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
+package com.tutoriales.simplecrudroom.interfaces.services;
 
 import com.tutoriales.simplecrudroom.entities.Person;
 import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
 
 import java.util.List;
 
-public interface IPersonRepository {
+public interface IPersonService {
     List<Person> getAll();
     Person getById(int id);
     long insert(Person person);
