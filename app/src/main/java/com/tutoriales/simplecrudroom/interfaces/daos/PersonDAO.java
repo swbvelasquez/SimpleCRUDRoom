@@ -8,13 +8,17 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.tutoriales.simplecrudroom.entities.Address;
 import com.tutoriales.simplecrudroom.entities.Person;
 import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
 
 import java.util.List;
 
+import static androidx.room.OnConflictStrategy.ABORT;
+
 @Dao
 public abstract class PersonDAO {
+
     //Metodos maestros
     @Query("select * from Person")
     public abstract List<Person> getAll();
@@ -42,12 +46,22 @@ public abstract class PersonDAO {
     @Transaction
     @Query("select * from Person where id=:id")
     public abstract List<PersonWithAdresses> getPersonWithAddressesById(int id);
-/*
-    @Transaction //cuando es un metodo transaccional, para controlar la consistencia de los movimientos realizados
-    @Insert
-    public abstract long insertPersonWithAdress(PersonWithAdresses personWithAdresses)
-    {
 
+    @Insert
+    public abstract List<Long> insertAddressList (List<Address> addressList);
+
+    @Transaction//cuando es un metodo transaccional, para controlar la consistencia de los movimientos realizados
+    public long insertPersonWithAddress(PersonWithAdresses personWithAdresses)
+    {
+        long id = insert(personWithAdresses.getPerson());
+
+        for(Address address : personWithAdresses.getAddressList()){
+            address.setPersonId((int)id);
+        }
+
+        insertAddressList(personWithAdresses.getAddressList());
+
+        return id;
     }
- */
+
 }

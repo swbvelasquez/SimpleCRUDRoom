@@ -20,4 +20,5 @@ public interface IPersonRepository {
     int delete(Person person);
     List<PersonWithAdresses> getPersonWithAddresses();
     List<PersonWithAdresses> getPersonWithAddressesById(int id);
+    long insertPersonWithAddress(PersonWithAdresses personWithAdresses);
 }

@@ -2,6 +2,7 @@ package com.tutoriales.simplecrudroom.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -59,5 +60,16 @@ public class Address {
 
     public void setPersonId(int personId) {
         this.personId = personId;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", personId=" + personId +
+                '}';
     }
 }

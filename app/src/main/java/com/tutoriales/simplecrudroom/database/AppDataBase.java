@@ -12,7 +12,7 @@ import com.tutoriales.simplecrudroom.interfaces.daos.AddressDAO;
 import com.tutoriales.simplecrudroom.interfaces.daos.PersonDAO;
 import com.tutoriales.simplecrudroom.utilities.ConfigurationDB;
 
-@Database(entities = {Person.class, Address.class}, version = 1)
+@Database(entities = {Person.class, Address.class}, version = 2)
 public abstract class AppDataBase extends RoomDatabase {
 
     public static AppDataBase INSTANCE; //Patron singleton

@@ -122,4 +122,15 @@ public class PersonRepository implements IPersonRepository {
         }
         return personList;
     }
+
+    @Override
+    public long insertPersonWithAddress(PersonWithAdresses personWithAdresses) {
+        long id=0;
+        try{
+            id=personDAO.insertPersonWithAddress(personWithAdresses);
+        }catch (Exception ex){
+            Log.d("error",ex.getMessage());
+        }
+        return id;
+    }
 }
