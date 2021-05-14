@@ -2,18 +2,14 @@ package com.tutoriales.simplecrudroom.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.tutoriales.simplecrudroom.utilities.ConfigurationDB;
-
-@Entity(tableName = ConfigurationDB.DB_TABLE_ADDRESS)
+@Entity(tableName = "Address")
 public class Address {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(index = true, name = ConfigurationDB.DB_COLUMN_ADDRESS_ID)
-    private int id;
-    @ColumnInfo(name = ConfigurationDB.DB_COLUMN_ADDRESS_STREET)
+    @ColumnInfo(index = true, name = "addressId")
+    private int addressId;
+    @ColumnInfo(name = "street")
     private String street;
     private String city;
     private String state;
@@ -22,12 +18,12 @@ public class Address {
     public Address() {
     }
 
-    public int getId() {
-        return id;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public String getStreet() {
@@ -65,7 +61,7 @@ public class Address {
     @Override
     public String toString() {
         return "Address{" +
-                "id=" + id +
+                "id=" + addressId +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +

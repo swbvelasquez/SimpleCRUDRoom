@@ -1,20 +1,24 @@
-package com.tutoriales.simplecrudroom.entities;
+package com.tutoriales.simplecrudroom.entities.relations;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
+import com.tutoriales.simplecrudroom.entities.Address;
+import com.tutoriales.simplecrudroom.entities.Person;
+
 import java.util.List;
 
-//relacion de uno a muchos
-public class PersonWithAdresses {
-    @Embedded private Person person;
+//relacion de uno a muchos persona con direccion
+public class PersonWithAddresses {
+    @Embedded
+    private Person person;
     @Relation(
-            parentColumn = "id",
+            parentColumn = "personId",
             entityColumn = "personId"
     )
     private List<Address> addressList;
 
-    public PersonWithAdresses() {
+    public PersonWithAddresses() {
     }
 
     public Person getPerson() {

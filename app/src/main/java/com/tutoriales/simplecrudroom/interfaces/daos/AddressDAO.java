@@ -15,7 +15,7 @@ public abstract class AddressDAO {
     @Query("select * from Address")
     public abstract List<Address> getAll();
 
-    @Query("select * from Address where id=:id")
+    @Query("select * from Address where addressId=:id")
     public abstract Address getById(int id);
 
     @Insert

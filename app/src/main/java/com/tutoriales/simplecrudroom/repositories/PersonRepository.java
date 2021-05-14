@@ -3,14 +3,11 @@ package com.tutoriales.simplecrudroom.repositories;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.room.Room;
-
 import com.tutoriales.simplecrudroom.database.AppDataBase;
 import com.tutoriales.simplecrudroom.entities.Person;
-import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
+import com.tutoriales.simplecrudroom.entities.relations.PersonWithAddresses;
 import com.tutoriales.simplecrudroom.interfaces.daos.PersonDAO;
 import com.tutoriales.simplecrudroom.interfaces.repositories.IPersonRepository;
-import com.tutoriales.simplecrudroom.utilities.ConfigurationDB;
 
 import java.util.List;
 
@@ -100,8 +97,8 @@ public class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public List<PersonWithAdresses> getPersonWithAddresses() {
-        List<PersonWithAdresses> personList=null;
+    public List<PersonWithAddresses> getPersonWithAddresses() {
+        List<PersonWithAddresses> personList=null;
 
         try{
             personList= personDAO.getPersonWithAddresses();
@@ -112,8 +109,8 @@ public class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public List<PersonWithAdresses> getPersonWithAddressesById(int id) {
-        List<PersonWithAdresses> personList=null;
+    public List<PersonWithAddresses> getPersonWithAddressesById(int id) {
+        List<PersonWithAddresses> personList=null;
 
         try{
             personList= personDAO.getPersonWithAddressesById(id);
@@ -124,10 +121,10 @@ public class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public long insertPersonWithAddress(PersonWithAdresses personWithAdresses) {
+    public long insertPersonWithAddress(PersonWithAddresses personWithAddresses) {
         long id=0;
         try{
-            id=personDAO.insertPersonWithAddress(personWithAdresses);
+            id=personDAO.insertPersonWithAddress(personWithAddresses);
         }catch (Exception ex){
             Log.d("error",ex.getMessage());
         }

@@ -4,14 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.tutoriales.simplecrudroom.utilities.ConfigurationDB;
-
-@Entity(tableName = ConfigurationDB.DB_TABLE_PERSON)
+@Entity(tableName = "Person")
 public class Person {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(index = true, name = ConfigurationDB.DB_COLUMN_PERSON_ID)
-    private int id;
-    @ColumnInfo(name = ConfigurationDB.DB_COLUMN_PERSON_NAME) //opcional
+    @ColumnInfo(index = true, name = "personId")
+    private int personId;
+    @ColumnInfo(name="name") //opcional
     private String name;
     private int age;
     private boolean active;
@@ -19,12 +17,12 @@ public class Person {
     public Person() {
     }
 
-    public int getId() {
-        return id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getName() {
@@ -54,7 +52,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + personId +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", active=" + active +

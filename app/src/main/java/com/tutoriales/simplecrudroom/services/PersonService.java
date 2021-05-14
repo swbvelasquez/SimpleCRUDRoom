@@ -3,11 +3,8 @@ package com.tutoriales.simplecrudroom.services;
 import android.content.Context;
 import android.util.Log;
 
-import com.tutoriales.simplecrudroom.database.AppDataBase;
-import com.tutoriales.simplecrudroom.entities.Address;
 import com.tutoriales.simplecrudroom.entities.Person;
-import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
-import com.tutoriales.simplecrudroom.interfaces.daos.PersonDAO;
+import com.tutoriales.simplecrudroom.entities.relations.PersonWithAddresses;
 import com.tutoriales.simplecrudroom.interfaces.services.IPersonService;
 import com.tutoriales.simplecrudroom.repositories.AddressRepository;
 import com.tutoriales.simplecrudroom.repositories.PersonRepository;
@@ -103,8 +100,8 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public List<PersonWithAdresses> getPersonWithAddresses() {
-        List<PersonWithAdresses> personList=null;
+    public List<PersonWithAddresses> getPersonWithAddresses() {
+        List<PersonWithAddresses> personList=null;
 
         try{
             personList= personRepository.getPersonWithAddresses();
@@ -115,8 +112,8 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public List<PersonWithAdresses> getPersonWithAddressesById(int id) {
-        List<PersonWithAdresses> personList=null;
+    public List<PersonWithAddresses> getPersonWithAddressesById(int id) {
+        List<PersonWithAddresses> personList=null;
 
         try{
             personList= personRepository.getPersonWithAddressesById(id);
@@ -127,10 +124,10 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public long insertPersonWithAddress(PersonWithAdresses personWithAdresses) {
+    public long insertPersonWithAddress(PersonWithAddresses personWithAddresses) {
         long id=0;
         try{
-            id=personRepository.insertPersonWithAddress(personWithAdresses);
+            id=personRepository.insertPersonWithAddress(personWithAddresses);
         }catch (Exception ex){
             Log.d("error",ex.getMessage());
         }

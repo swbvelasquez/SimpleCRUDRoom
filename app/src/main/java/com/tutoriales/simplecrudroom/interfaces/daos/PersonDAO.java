@@ -3,18 +3,15 @@ package com.tutoriales.simplecrudroom.interfaces.daos;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.tutoriales.simplecrudroom.entities.Address;
 import com.tutoriales.simplecrudroom.entities.Person;
-import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
+import com.tutoriales.simplecrudroom.entities.relations.PersonWithAddresses;
 
 import java.util.List;
-
-import static androidx.room.OnConflictStrategy.ABORT;
 
 @Dao
 public abstract class PersonDAO {
@@ -23,7 +20,7 @@ public abstract class PersonDAO {
     @Query("select * from Person")
     public abstract List<Person> getAll();
 
-    @Query("select * from Person where id=:id")
+    @Query("select * from Person where personId=:id")
     public abstract Person getById(int id);
 
     @Insert
@@ -41,25 +38,25 @@ public abstract class PersonDAO {
     //Metodos con relaciones
     @Transaction // cuando es consultas con una entidad relacionada, hace dos consultas por lo que requiere estar en una transaccion
     @Query("select * from Person")
-    public abstract List<PersonWithAdresses> getPersonWithAddresses();
+    public abstract List<PersonWithAddresses> getPersonWithAddresses();
 
     @Transaction
-    @Query("select * from Person where id=:id")
-    public abstract List<PersonWithAdresses> getPersonWithAddressesById(int id);
+    @Query("select * from Person where personId=:id")
+    public abstract List<PersonWithAddresses> getPersonWithAddressesById(int id);
 
     @Insert
     public abstract List<Long> insertAddressList (List<Address> addressList);
 
     @Transaction//cuando es un metodo transaccional, para controlar la consistencia de los movimientos realizados
-    public long insertPersonWithAddress(PersonWithAdresses personWithAdresses)
+    public long insertPersonWithAddress(PersonWithAddresses personWithAddresses)
     {
-        long id = insert(personWithAdresses.getPerson());
+        long id = insert(personWithAddresses.getPerson());
 
-        for(Address address : personWithAdresses.getAddressList()){
+        for(Address address : personWithAddresses.getAddressList()){
             address.setPersonId((int)id);
         }
 
-        insertAddressList(personWithAdresses.getAddressList());
+        insertAddressList(personWithAddresses.getAddressList());
 
         return id;
     }

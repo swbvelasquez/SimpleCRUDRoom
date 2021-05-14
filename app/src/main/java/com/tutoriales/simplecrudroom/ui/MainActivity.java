@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.tutoriales.simplecrudroom.R;
 import com.tutoriales.simplecrudroom.entities.Address;
 import com.tutoriales.simplecrudroom.entities.Person;
-import com.tutoriales.simplecrudroom.entities.PersonWithAdresses;
+import com.tutoriales.simplecrudroom.entities.relations.PersonWithAddresses;
 import com.tutoriales.simplecrudroom.interfaces.services.IPersonService;
 import com.tutoriales.simplecrudroom.services.PersonService;
 
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         Person person = null;
         List<Address> addressList = new ArrayList<>();
         Address address;
-        PersonWithAdresses personWithAdresses = new PersonWithAdresses();
+        PersonWithAddresses personWithAddresses = new PersonWithAddresses();
         int randomNumber = (int) (Math.random() * 50);
         long result=0;
 
@@ -136,10 +136,10 @@ public class MainActivity extends AppCompatActivity {
         address.setState("state " + randomNumber);
         addressList.add(address);
 
-        personWithAdresses.setPerson(person);
-        personWithAdresses.setAddressList(addressList);
+        personWithAddresses.setPerson(person);
+        personWithAddresses.setAddressList(addressList);
 
-        result= personService.insertPersonWithAddress(personWithAdresses);
+        result= personService.insertPersonWithAddress(personWithAddresses);
 
         Toast.makeText(this,"result: " + result,Toast.LENGTH_SHORT).show();
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getAllPersonsWithAddress(){
-        List<PersonWithAdresses> list = personService.getPersonWithAddresses();
+        List<PersonWithAddresses> list = personService.getPersonWithAddresses();
         tvResult.setText(list.toString());
     }
 }
