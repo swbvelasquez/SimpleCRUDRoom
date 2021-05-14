@@ -14,7 +14,6 @@ import java.util.List;
 public class PersonService implements IPersonService {
 
     private static PersonRepository personRepository=null;
-    private static AddressRepository addressRepository=null;
     public static PersonService INSTANCE;
 
     public PersonService() {
@@ -22,7 +21,6 @@ public class PersonService implements IPersonService {
 
     public static PersonService getInstance(Context context){
         personRepository = PersonRepository.getInstance(context);
-        addressRepository = AddressRepository.getInstance(context);
 
         if(INSTANCE==null){
             INSTANCE = new PersonService();

@@ -15,6 +15,7 @@ import com.tutoriales.simplecrudroom.entities.School;
 import com.tutoriales.simplecrudroom.entities.relations.BrandWithProductCrossRef;
 import com.tutoriales.simplecrudroom.interfaces.daos.AddressDAO;
 import com.tutoriales.simplecrudroom.interfaces.daos.BrandDAO;
+import com.tutoriales.simplecrudroom.interfaces.daos.BrandWithProductCrossRefDAO;
 import com.tutoriales.simplecrudroom.interfaces.daos.PersonDAO;
 import com.tutoriales.simplecrudroom.interfaces.daos.ProductDAO;
 import com.tutoriales.simplecrudroom.interfaces.daos.SchoolDAO;
@@ -36,6 +37,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract SchoolDAO schoolDAO();
     public abstract ProductDAO productDAO();
     public abstract BrandDAO brandDAO();
+    public abstract BrandWithProductCrossRefDAO brandWithProductCrossRefDAO();
 
     public static AppDataBase getInstance(Context context){
 
